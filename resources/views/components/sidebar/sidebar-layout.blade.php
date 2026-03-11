@@ -1,4 +1,4 @@
-<aside class="min-h-screen max-w-56 bg-mist-800">
+<aside class="fixed z-50 min-h-screen min-w-56 bg-mist-800">
     <div class="flex flex-col gap-3">
         {{-- 
         ==============
