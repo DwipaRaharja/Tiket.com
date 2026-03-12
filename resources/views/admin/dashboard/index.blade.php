@@ -22,10 +22,7 @@
         HEADER LAYOUT
         ==============
         --}}
-        <header>
-            <h1 class="text-4xl font-bold uppercase">dashboard</h1>
-            <p class="">Lorem ipsum dolor, sit amet consectetur adipisicing</p>
-        </header>
+        <x-layout.admin-header-content title="Dashboard" text="Halaman melihat data secara ringkas" />
         {{-- 
         ========
         CONTENT
@@ -37,6 +34,8 @@
             CARD LIST
             =========
             --}}
+
+            {{-- catatan : value ambil data di database --}}
             <x-cards.card-admin-dashboard
                 title="Total Pemesanan"
                 value="120"
@@ -84,6 +83,7 @@
                             COLUMN BODY
                             ===========
                         --}}
+                        {{-- catatan : pakai foreach --}}
                         <tr class="transition hover:bg-gray-50">
                             <td class="px-6 py-4">PSS-001</td>
                             <td class="px-6 py-4 font-medium">Roma Kelapa</td>
@@ -128,6 +128,7 @@
                             COLUMN BODY
                             ===========
                         --}}
+                        {{-- catatan : pakai dowhile --}}
                         <tr class="transition hover:bg-gray-50">
                             <td class="px-6 py-4 capitalize">Surya Husada</td>
                             <td class="px-6 py-4 text-black">Denpasar -> Buleleng</td>
