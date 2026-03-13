@@ -23,7 +23,7 @@
         ==============
         --}}
         <x-layout.admin-header-content
-            title="Edit Data Users"
+            title="Update Data User"
             text="Halaman untuk mengedit data users"
         />
         {{-- 
@@ -86,12 +86,6 @@
                             :selectOptions="['admin', 'customer']"
                             value="{{ $user->role }}"
                         />
-
-                        {{-- 
-                        TIPS: Jika ingin menambah inputan baru, 
-                        cukup copy-paste blok <div> di atas di sini. 
-                        Grid akan otomatis menyesuaikan posisinya. 
-                    --}}
                     </div>
                 </form>
             </div>

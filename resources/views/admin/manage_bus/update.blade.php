@@ -23,8 +23,8 @@
         ==============
         --}}
         <x-layout.admin-header-content
-            title="Tambah Data Baru"
-            text="Halaman untuk menambah data bus"
+            title="Update Data Bus"
+            text="Halaman untuk update data bus"
         />
         {{-- 
         ========

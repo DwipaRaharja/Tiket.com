@@ -8,5 +8,6 @@ Route::get('/detail-tiket/{id}', [PemesananController::class, 'detailPemesananUs
 
 Route::get('/pembayaran/{id}', [PemesananController::class, 'pembayaranPemesananUser']);
 Route::post('/pembayaran/{id}', [PemesananController::class, 'konfirmasiBayar']);
+Route::post('/pemesanan', [PemesananController::class, 'storeUser'])->name('pemesanan.store');
 
 Route::delete('/pemesanan/{id}', [PemesananController::class, 'destroy']);

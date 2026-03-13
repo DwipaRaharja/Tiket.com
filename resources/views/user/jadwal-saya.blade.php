@@ -47,7 +47,7 @@
                 <div class="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-md">
                     <div class="flex items-center justify-between border-b bg-blue-50 px-6 py-3">
                         <span class="text-xs font-bold tracking-widest text-blue-800 uppercase">
-                            KODE: {{ $data->id }}
+                            KODE: {{ $data->kode_booking }}
                         </span>
 
                         <span

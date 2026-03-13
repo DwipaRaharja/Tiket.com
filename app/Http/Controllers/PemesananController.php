@@ -176,4 +176,45 @@ class PemesananController extends Controller
         return redirect('/jadwal-saya')
             ->with('success', 'Pembayaran berhasil');
     }
+
+    public function storeUser(Request $request)
+    {
+        $validate = $request->validate([
+            'jadwal' => 'required',
+            'nama_penumpang' => 'required',
+            'jumlah_kursi' => 'required|integer',
+            'total_harga' => 'required|integer',
+            'status' => 'required',
+        ], [
+            'jadwal.required' => 'Pilihan jadwal kosong',
+            'nama_penumpang.required' => 'Nama penumpang kosong',
+            'jumlah_kursi.required' => 'Jumlah kursi kosong',
+            'status' => 'pilihan status kosong',
+        ]);
+
+        $jadwal = Jadwal::findOrFail($request->jadwal_id);
+        $total = $jadwal->harga * $request->jumlah_kursi;
+
+        $last = Pemesanan::orderBy('id', 'desc')->first();
+
+        if ($last) {
+            $number = (int) substr($last->kode_booking, 4) + 1;
+        } else {
+            $number = 1;
+        }
+
+        $kode_booking = 'TCK-' . str_pad($number, 3, '0', STR_PAD_LEFT);
+
+        Pemesanan::create([
+            'kode_booking' => $kode_booking,
+            'jadwal_id' => $request->jadwal_id,
+            'user_id' => auth()->id(),
+            'nama_penumpang' => $request->nama_penumpang,
+            'jumlah_kursi' => $request->jumlah_kursi,
+            'total_harga' => $total,
+            'status' => 'pending',
+        ]);
+
+        return redirect('/jadwal-saya');
+    }
 }

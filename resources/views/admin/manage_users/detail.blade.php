@@ -23,8 +23,8 @@
         ==============
         --}}
         <x-layout.admin-header-content
-            title="Detail Data Customer"
-            text="Halaman untuk melihat detail customer"
+            title="Detail Data User"
+            text="Halaman untuk melihat detail user"
         />
         {{-- 
         ========
@@ -37,7 +37,7 @@
                 <div
                     class="flex items-center justify-between border-b border-gray-100 bg-gray-50/50 px-6 py-4"
                 >
-                    <h3 class="font-bold text-gray-700">Detail Customer</h3>
+                    <h3 class="font-bold text-gray-700">Detail User</h3>
                     <div class="flex items-center space-x-3">
                         <a
                             href="/admin/manage-user"

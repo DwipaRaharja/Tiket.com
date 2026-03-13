@@ -22,7 +22,7 @@
         HEADER LAYOUT
         ==============
         --}}
-        <x-layout.admin-header-content title="Manage" text="Halaman untuk mengelola data bus" />
+        <x-layout.admin-header-content title="Management Pemesanan" text="Halaman untuk mengelola data pemesanan" />
         {{-- 
         ========
         CONTENT

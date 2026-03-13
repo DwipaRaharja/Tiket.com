@@ -22,18 +22,30 @@
             </div>
 
             <div class="flex items-center gap-3">
-                <a
-                    href="/login"
-                    class="px-5 py-2 text-sm font-bold text-blue-800 transition hover:text-blue-600"
-                >
-                    Log In
-                </a>
-                <a
-                    href="/signup"
-                    class="rounded-full bg-blue-800 px-5 py-2 text-sm font-bold text-white shadow-md transition hover:bg-blue-900"
-                >
-                    Sign Up
-                </a>
+                @auth
+                    <span class="text-sm font-bold text-gray-700">
+                        Halo, {{ auth()->user()->name }}
+                    </span>
+                    <form method="POST" action="/logout">
+                        @csrf
+                        <button
+                            class="rounded-full bg-red-600 px-4 py-2 text-sm font-bold text-white"
+                        >
+                            Logout
+                        </button>
+                    </form>
+
+                @endauth
+                @guest
+                    <a href="/login" class="px-5 py-2 text-sm font-bold text-blue-800"> Log In </a>
+                    <a
+                        href="/signup"
+                        class="rounded-full bg-blue-800 px-5 py-2 text-sm font-bold text-white"
+                    >
+                        Sign Up
+                    </a>
+
+                @endguest
             </div>
         </div>
     </nav>
@@ -123,7 +135,7 @@
                                     {{ \Carbon\Carbon::parse($j->tanggal)->format('d M Y') }}
                                 </span>
 
-                                <span class="font-bold"> {{ $j->jam }} </span>
+                                <span class="font-bold"> {{ $j->jam_berangkat }} </span>
                             </div>
 
                             <div class="flex items-end justify-between border-t pt-4">
@@ -136,7 +148,7 @@
                                 </div>
 
                                 <button
-                                    onclick="openModal()"
+                                    onclick="openModal({{ $j->id }}, {{ $j->harga }})"
                                     class="rounded-xl bg-blue-800 px-6 py-3 font-bold text-white hover:bg-red-600"
                                 >
                                     Pilih
@@ -169,8 +181,11 @@
                 </button>
             </div>
 
-            <form class="space-y-5 p-8">
+            {{-- pada bagian ini submit data pemsanan --}}
+            <form method="POST" action="{{ route('pemesanan.store') }}" class="space-y-5 p-8">
+                @csrf
                 <div>
+                    <input type="hidden" name="jadwal_id" id="jadwal_id" />
                     <label
                         class="mb-2 block text-xs font-bold tracking-widest text-gray-400 uppercase"
                         >Nama Penumpang</label
@@ -192,6 +207,7 @@
                         <input
                             type="number"
                             name="jumlah_kursi"
+                            id="jumlah_kursi"
                             min="1"
                             value="1"
                             class="w-full rounded-xl border border-gray-200 px-4 py-3 transition-all outline-none focus:ring-2 focus:ring-blue-500"
@@ -203,18 +219,13 @@
                             >Total Bayar</label
                         >
                         <div
+                            id="totalHarga"
                             class="w-full rounded-xl border border-gray-100 bg-gray-50 px-4 py-3 font-black text-red-600"
                         >
-                            Rp 250.000
+                            Rp 0
                         </div>
                     </div>
                 </div>
-
-                {{-- <div class="flex gap-3 rounded-xl border border-yellow-100 bg-yellow-50 p-4">
-                    <span class="text-xl">⚠️</span>
-                    <p class="text-[11px] leading-relaxed text-yellow-800">Pastikan jadwal sudah sesuai. Tiket akan diproses setelah pembayaran berhasil dan status akan berubah menjadi <strong>Lunas</strong>.</p>
-                </div> --}}
-
                 <button
                     type="submit"
                     class="w-full rounded-2xl bg-blue-800 py-4 text-lg font-black text-white shadow-lg shadow-blue-200 transition-all hover:bg-blue-900 active:scale-95"
@@ -253,22 +264,34 @@
         </div>
     </footer>
     <script>
-        function openModal() {
+        let hargaTiket = 0;
+
+        function openModal(id, harga) {
             document.getElementById('bookingModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Matikan scroll body
+
+            document.getElementById('jadwal_id').value = id;
+
+            hargaTiket = harga;
+
+            hitungTotal();
+
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('bookingModal').classList.add('hidden');
-            document.body.style.overflow = 'auto'; // Aktifkan kembali scroll body
+            document.body.style.overflow = 'auto';
         }
 
-        // Pasang fungsi openModal ke semua tombol "Pilih"
-        document.querySelectorAll('button').forEach((btn) => {
-            if (btn.innerText === 'Pilih') {
-                btn.setAttribute('onclick', 'openModal()');
-            }
-        });
+        function hitungTotal() {
+            let jumlah = document.getElementById('jumlah_kursi').value;
+
+            let total = hargaTiket * jumlah;
+
+            document.getElementById('totalHarga').innerText = 'Rp ' + total.toLocaleString('id-ID');
+        }
+
+        document.getElementById('jumlah_kursi').addEventListener('input', hitungTotal);
     </script>
 </body>
 </html>

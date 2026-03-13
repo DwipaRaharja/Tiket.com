@@ -23,7 +23,7 @@
         ==============
         --}}
         <x-layout.admin-header-content
-            title="Tambah Data Users Baru"
+            title="Tambah Data baru"
             text="Halaman untuk menambah data users baru"
         />
         {{-- 

@@ -23,8 +23,8 @@
         ==============
         --}}
         <x-layout.admin-header-content
-            title="Detail Data Customer"
-            text="Halaman untuk melihat detail customer"
+            title="Detail Data Jadwal"
+            text="Halaman untuk melihat detail jadwal"
         />
         {{-- 
         ========
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 @csrf
-                <div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-3">
+                <div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-2">
                     <x-form.admin-detail-data
                         name="Rute"
                         value="{{ $jadwal->asal }} -> {{ $jadwal->tujuan }}"
