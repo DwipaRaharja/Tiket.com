@@ -24,7 +24,7 @@ return new class extends Migration {
                 ->cascadeOnDelete();
 
             $table->string('nama_penumpang');
-            $table->integer('nomor_kursi');
+            $table->integer('jumlah_kursi');
             $table->integer('total_harga');
 
             $table->enum('status', ['pending', 'dibayar', 'batal'])

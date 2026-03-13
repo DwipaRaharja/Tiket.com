@@ -97,4 +97,31 @@ class UserController extends Controller
         return redirect('/admin/manage-user')->with('success', 'Data berhasil dihapus');
     }
 
+    public function cekData(Request $request)
+    {
+        $request->validate([
+            'nama_user' => 'required',
+            'email_user' => 'required',
+        ], [
+            'nama_user.required' => 'Nama user kosong',
+            'email_user.required' => 'Email user kosong',
+        ]);
+
+        $user = User::where('name', $request->nama_user)
+            ->where('email', $request->email_user)
+            ->first();
+
+        if (!$user) {
+            return back()
+                ->withInput()
+                ->with('error', 'User tidak ditemukan');
+        }
+
+        return back()
+            ->withInput()
+            ->with('success', 'User ditemukan')
+            ->with('user_found', true)
+            ->with('user_id', $user->id);
+    }
+
 }

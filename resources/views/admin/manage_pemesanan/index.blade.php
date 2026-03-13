@@ -26,13 +26,13 @@
         {{-- 
         ========
         CONTENT
-        ========
+        ========s
         --}}
         {{-- content --}}
         <section>
             <div class="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <a
-                    href="{{ route('user.create') }}"
+                    href="{{ route('pemesanan.create') }}"
                     class="inline-flex items-center rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition duration-150 ease-in-out hover:bg-blue-700"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,7 +42,7 @@
                 </a>
             </div>
 
-            @if ($user->count())
+            @if ($pemesanan->count())
                 <div class="overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm">
                     <div class="overflow-x-auto">
                         <table class="w-full border-collapse text-left">
@@ -59,7 +59,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-100">
                                 {{-- Tambahkan perulangan foreach --}}
-                                @foreach ($user as $data)
+                                @foreach ($pemesanan as $data)
                                     <tr class="transition hover:bg-gray-50">
                                         <td class="px-6 py-4 text-sm text-gray-600">
                                             {{ $loop->iteration }}
@@ -76,21 +76,21 @@
                                         <td class="px-6 py-4">
                                             <div class="flex items-center justify-center space-x-3">
                                                 <a
-                                                    href="{{ route('user.show', $data->id) }}"
+                                                    href="{{ route('pemesanan.show', $data->id) }}"
                                                     class="p-1 text-blue-600 transition hover:text-blue-900"
                                                     title="Edit Data"
                                                 >
                                                     Detail
                                                 </a>
                                                 <a
-                                                    href="{{ route('user.edit', $data->id) }}"
+                                                    href="{{ route('pemesanan.edit', $data->id) }}"
                                                     class="p-1 text-blue-600 transition hover:text-blue-900"
                                                     title="Edit Data"
                                                 >
                                                     Edit
                                                 </a>
                                                 <form
-                                                    action="{{ route('user.destroy', $data->id) }}"
+                                                    action="{{ route('pemesanan.destroy', $data->id) }}"
                                                     method="POST"
                                                 >
                                                     @csrf
@@ -116,7 +116,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div>{{ $user->links('vendor.pagination.custom') }}</div>
+                    <div>{{ $pemesanan->links('vendor.pagination.custom') }}</div>
                 </div>
             @else
                 <div class="flex flex-col items-center justify-center">

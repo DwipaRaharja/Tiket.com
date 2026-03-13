@@ -11,11 +11,9 @@ class Pemesanan extends Model
     protected $fillable = [
         'kode_booking',
         'user_id',
-        'kode_booking',
-        'user_id',
         'jadwal_id',
         'nama_penumpang',
-        'nomor_kursi',
+        'jumlah_kursi',
         'total_harga',
         'status',
     ];
@@ -23,7 +21,7 @@ class Pemesanan extends Model
     public function jadwal(){
         return $this->belongsTo(Jadwal::class);
     }
-    public function users(){
-        return $this->belongsTo(Jadwal::class);
+    public function user(){
+        return $this->belongsTo(user::class);
     }
 }

@@ -17,7 +17,12 @@ class Jadwal extends Model
         'harga'
     ];
 
-    public function bus(){
+    public function bus()
+    {
         return $this->belongsTo(Bus::class);
+    }
+    public function jadwal()
+    {
+        return $this->hasMany(Pemesanan::class);
     }
 }
