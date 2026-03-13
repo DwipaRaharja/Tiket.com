@@ -33,6 +33,7 @@ class PemesananController extends Controller
      */
     public function store(Request $request)
     {
+        dd('masuk');
         $validate = $request->validate([
             'user_id' => 'required',
             'jadwal' => 'required',
@@ -67,7 +68,6 @@ class PemesananController extends Controller
             'total_harga' => $validate['total_harga'],
             'status' => $validate['status'],
         ]);
-
         return redirect('/admin/manage-pemesanan')->with('success', 'Data berhasil disimpan');
     }
 
