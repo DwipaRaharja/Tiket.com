@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pemesanaan;
+use App\Models\Pemesanan;
 use Illuminate\Http\Request;
 
-class PemesanaanController extends Controller
+class PemesananController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        // $pemesanan = Pemesanan::
     }
 
     /**
@@ -34,7 +34,7 @@ class PemesanaanController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pemesanaan $pemesanaan)
+    public function show(Pemesanan $pemesanan)
     {
         //
     }
@@ -42,7 +42,7 @@ class PemesanaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pemesanaan $pemesanaan)
+    public function edit(Pemesanan $pemesanan)
     {
         //
     }
@@ -50,7 +50,7 @@ class PemesanaanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pemesanaan $pemesanaan)
+    public function update(Request $request, Pemesanan $pemesanan)
     {
         //
     }
@@ -58,7 +58,7 @@ class PemesanaanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pemesanaan $pemesanaan)
+    public function destroy(Pemesanan $pemesanan)
     {
         //
     }

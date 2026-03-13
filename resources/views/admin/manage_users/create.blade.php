@@ -58,7 +58,7 @@
 
                 <form
                     id="form-create-data"
-                    action="{{ route('users.store') }}"
+                    action="{{ route('user.store') }}"
                     method="POST"
                     class="p-6"
                 >
@@ -83,7 +83,7 @@
                             typeInput="password"
                         />
                         <x-form.admin-input-data
-                            name="Role Users"
+                            name="Role User"
                             nameRequest="role"
                             typeInput="select"
                             :selectOptions="['admin', 'customer']"

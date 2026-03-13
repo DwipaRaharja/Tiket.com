@@ -38,7 +38,7 @@
                 <path d="M18 21v-2" />
                 >
             </x-sidebar.sidebar-link>
-            <x-sidebar.sidebar-link name="manage users" link="/admin/manage-users">
+            <x-sidebar.sidebar-link name="manage users" link="/admin/manage-user">
                 <path
                     stroke-linecap="round"
                     stroke-linejoin="round"

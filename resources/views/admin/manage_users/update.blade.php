@@ -41,7 +41,7 @@
                     <div class="flex items-center space-x-3">
                         <a
                             type="reset"
-                            href="/admin/manage-users"
+                            href="/admin/manage-user"
                             class="cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-50"
                         >
                             Batal
@@ -58,7 +58,7 @@
 
                 <form
                     id="form-create-data"
-                    action="{{ route('users.update', $users->id) }}"
+                    action="{{ route('user.update', $user->id) }}"
                     method="POST"
                     class="p-6"
                 >
@@ -70,21 +70,21 @@
                             placeholder="Contoh : Guna Arta"
                             nameRequest="name"
                             typeInput="text"
-                            value="{{ $users->name }}"
+                            value="{{ $user->name }}"
                         />
                         <x-form.admin-update-data
                             name="email"
                             placeholder="Contoh : GOP-001"
                             nameRequest="email"
                             typeInput="text"
-                            value="{{ $users->email }}"
+                            value="{{ $user->email }}"
                         />
                         <x-form.admin-update-data
                             name="role"
                             nameRequest="role"
                             typeInput="select"
                             :selectOptions="['admin', 'customer']"
-                            value="{{ $users->role }}"
+                            value="{{ $user->role }}"
                         />
 
                         {{-- 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\PemesananController;
 use Illuminate\Support\Facades\Route;
 
-Route::resource('jadwal', JadwalController::class);
+Route::resource('pemesanan', PemesananController::class);

@@ -40,7 +40,7 @@
                     <h3 class="font-bold text-gray-700">Detail Customer</h3>
                     <div class="flex items-center space-x-3">
                         <a
-                            href="/admin/manage-users"
+                            href="/admin/manage-user"
                             class="cursor-pointer rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-600 transition hover:bg-gray-50"
                         >
                             Kembali
@@ -51,17 +51,17 @@
                 <div class="grid grid-cols-1 gap-6 p-6 md:grid-cols-2">
                     <x-form.admin-detail-data
                         name="Nama"
-                        value="{{ $users->name }}"
+                        value="{{ $user->name }}"
                         inputType="text"
                     />
                     <x-form.admin-detail-data
                         name="Email"
-                        value="{{ $users->email }}"
+                        value="{{ $user->email }}"
                         inputType="text"
                     />
                     <x-form.admin-detail-data
                         name="Role"
-                        value="{{ $users->role }}"
+                        value="{{ $user->role }}"
                         inputType="text"
                     />
 

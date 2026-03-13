@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Users;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = Users::paginate('5');
-        return view('admin.manage_users.index', compact('users'));
+        $user = User::paginate('5');
+        return view('admin.manage_users.index', compact('user'));
     }
 
     /**
@@ -45,9 +45,8 @@ class UsersController extends Controller
             'role.required' => 'Role harus dipilih',
         ]);
 
-        Users::create($validate);
-        return redirect('/admin/manage-users')->with('success', 'Data berhasil di simpan');
-
+        User::create($validate);
+        return redirect('/admin/manage-user')->with('success', 'Data berhasil di simpan');
     }
 
     /**
@@ -55,17 +54,14 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $users = Users::findOrFail($id);
-        return view('admin.manage_users.detail', compact('users'));
+        $user = User::findOrFail($id);
+        return view('admin.manage_users.detail', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
-        $users = Users::findOrFail($id);
-        return view('admin.manage_users.update', compact('users'));
+        $user = User::findOrFail($id);
+        return view('admin.manage_users.update', compact('user'));
     }
 
     /**
@@ -87,17 +83,18 @@ class UsersController extends Controller
             'email.unique' => 'Email sudah digunakan',
             'role.required' => 'Role harus dipilih',
         ]);
-        $users = Users::findOrFail($id);
-        $users->update($validate);
-        return redirect('/admin/manage-users')->with('success', 'Data berhasil di simpan');
+        $user = User::findOrFail($id);
+        $user->update($validate);
+        return redirect('/admin/manage-user')->with('success', 'Data berhasil di simpan');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Users $users, $id)
+    public function destroy(User $users, $id)
     {
         $users::findOrFail($id)->delete();
-        return redirect('/admin/manage-users')->with('success', 'Data berhasil dihapus');
+        return redirect('/admin/manage-user')->with('success', 'Data berhasil dihapus');
     }
+
 }

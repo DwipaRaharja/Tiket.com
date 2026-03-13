@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 // ADMIN
 require __DIR__ . '/admin/sidebar.php';
 require __DIR__ . '/admin/manage_bus.php';
-require __DIR__ . '/admin/manage_users.php';
+require __DIR__ . '/admin/manage_user.php';
 require __DIR__ . '/admin/manage_jadwal.php';
 
 Route::get('/', function () {
