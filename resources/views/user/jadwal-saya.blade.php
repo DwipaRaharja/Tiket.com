@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jadwal Saya - TiketBus</title>
+    <title>Jadwal Saya - Tiket.Com</title>
     <script src="https://cdn.tailwindcss.com"></script>
     @vite (['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -11,28 +11,40 @@
     <nav class="fixed z-50 w-full bg-white shadow-md">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
             <div class="text-2xl font-extrabold tracking-tighter text-red-600">
-                TIKET<span class="text-blue-800">BUS</span>
+                TIKET<span class="text-blue-800">.COM</span>
             </div>
 
-            <div class="hidden space-x-8 font-bold text-gray-700 md:flex">
+            <div class="hidden space-x-5 font-bold text-gray-700 md:flex">
                 <a href="/home" class="transition hover:text-red-600">Home</a>
                 <a href="/jadwal-saya" class="transition hover:text-red-600">Jadwal Saya</a>
                 <a href="/contact" class="transition hover:text-red-600">Contact</a>
             </div>
 
             <div class="flex items-center gap-3">
-                <a
-                    href="/login"
-                    class="px-5 py-2 text-sm font-bold text-blue-800 transition hover:text-blue-600"
-                >
-                    Log In
-                </a>
-                <a
-                    href="/signup"
-                    class="rounded-full bg-blue-800 px-5 py-2 text-sm font-bold text-white shadow-md transition hover:bg-blue-900"
-                >
-                    Sign Up
-                </a>
+                @auth
+                    <span class="text-sm font-bold text-gray-700">
+                        Halo, {{ auth()->user()->name }}
+                    </span>
+                    <form method="POST" action="/logout">
+                        @csrf
+                        <button
+                            class="rounded-full bg-red-600 px-4 py-2 text-sm font-bold text-white"
+                        >
+                            Logout
+                        </button>
+                    </form>
+
+                @endauth
+                @guest
+                    <a href="/login" class="px-5 py-2 text-sm font-bold text-blue-800"> Log In </a>
+                    <a
+                        href="/signup"
+                        class="rounded-full bg-blue-800 px-5 py-2 text-sm font-bold text-white"
+                    >
+                        Sign Up
+                    </a>
+
+                @endguest
             </div>
         </div>
     </nav>
@@ -171,7 +183,7 @@
     </main>
 
     <footer class="border-t py-10 text-center text-sm text-gray-400">
-        &copy; 2026 TiketBus System. All rights reserved.
+        &copy; 2026 TiketCom System. All rights reserved.
     </footer>
 </body>
 </html>

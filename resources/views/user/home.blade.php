@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <title>Home - Tiket.Com</title>
 
     @vite (['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -12,7 +12,7 @@
     <nav class="fixed z-50 w-full bg-white shadow-md">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
             <div class="text-2xl font-extrabold tracking-tighter text-red-600">
-                TIKET<span class="text-blue-800">BUS</span>
+                TIKET<span class="text-blue-800">.COM</span>
             </div>
 
             <div class="hidden space-x-8 font-bold text-gray-700 md:flex">
@@ -239,7 +239,7 @@
         <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 md:flex-row">
             <div>
                 <div class="mb-4 text-2xl font-black text-red-600 italic">
-                    TIKET<span class="text-blue-800">BUS</span>
+                    TIKET<span class="text-blue-800">.COM</span>
                 </div>
                 <p class="max-w-xs text-sm text-gray-500">Layanan pemesanan tiket bus terpercaya sejak 2026. Perjalanan Anda, prioritas kami.</p>
             </div>
