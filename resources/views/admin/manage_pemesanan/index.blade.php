@@ -51,9 +51,12 @@
                             >
                                 <tr>
                                     <th class="px-6 py-4 font-bold">No</th>
-                                    <th class="px-6 py-4 font-bold">Nama</th>
-                                    <th class="px-6 py-4 font-bold">Email</th>
-                                    <th class="px-6 py-4 font-bold">Role</th>
+                                    <th class="px-6 py-4 font-bold">Kode Booking</th>
+                                    <th class="px-6 py-4 font-bold">Rute</th>
+                                    <th class="px-6 py-4 font-bold">Nama Penumpang</th>
+                                    <th class="px-6 py-4 text-center font-bold">Jumlah Ticket</th>
+                                    <th class="px-6 py-4 text-center font-bold">Total</th>
+                                    <th class="px-6 py-4 text-center font-bold">Status</th>
                                     <th class="px-6 py-4 text-center font-bold">Aksi</th>
                                 </tr>
                             </thead>
@@ -64,14 +67,33 @@
                                         <td class="px-6 py-4 text-sm text-gray-600">
                                             {{ $loop->iteration }}
                                         </td>
-                                        <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                                            {{ $data->name }}
+                                        <td
+                                            class="px-6 py-4 text-sm font-medium text-nowrap text-gray-900"
+                                        >
+                                            {{ $data->kode_booking }}
                                         </td>
-                                        <td class="px-6 py-4 text-sm text-gray-600">
-                                            {{ $data->email }}
+                                        <td
+                                            class="px-6 py-4 text-sm font-medium text-nowrap text-gray-900"
+                                        >
+                                            {{ $data->jadwal->asal }} -> {{ $data->jadwal->tujuan }}
                                         </td>
-                                        <td class="px-6 py-4 text-sm font-medium text-gray-800">
-                                            {{ $data->role }}
+                                        <td class="px-6 py-4 text-sm text-nowrap text-gray-600">
+                                            {{ $data->nama_penumpang }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 text-sm font-medium text-nowrap text-gray-800"
+                                        >
+                                            {{ $data->jumlah_kursi }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 text-sm font-medium text-nowrap text-gray-800"
+                                        >
+                                            {{ $data->total_harga }}
+                                        </td>
+                                        <td
+                                            class="px-6 py-4 text-sm font-medium text-nowrap text-gray-800 capitalize"
+                                        >
+                                            {{ $data->status }}
                                         </td>
                                         <td class="px-6 py-4">
                                             <div class="flex items-center justify-center space-x-3">

@@ -22,7 +22,10 @@
         HEADER LAYOUT
         ==============
         --}}
-        <x-layout.admin-header-content title="Dashboard" text="Halaman melihat data secara ringkas" />
+        <x-layout.admin-header-content
+            title="Dashboard"
+            text="Halaman melihat data secara ringkas"
+        />
         {{-- 
         ========
         CONTENT
@@ -38,17 +41,17 @@
             {{-- catatan : value ambil data di database --}}
             <x-cards.card-admin-dashboard
                 title="Total Pemesanan"
-                value="120"
+                value="{{ $totalPemesanan }}"
                 text="Jumlah keseluruhan pemesanan"
             ></x-cards.card-admin-dashboard>
             <x-cards.card-admin-dashboard
                 title="Total Pendapatan"
-                value="Rp. 120.000.000"
+                value="Rp. {{ number_format($totalPendapatan) }}"
                 text="Jumlah pendapatan hari ini"
             ></x-cards.card-admin-dashboard>
             <x-cards.card-admin-dashboard
                 title="Total Jadwal"
-                value="120"
+                value="{{ $totalJadwal }}"
                 text="Jumlah keseluruhan jadwal"
             ></x-cards.card-admin-dashboard>
         </section>
@@ -70,11 +73,12 @@
                             COLUMN HEAD
                             ===========
                         --}}
+
                         <tr>
                             <th class="px-6 py-3 font-semibold">Kode</th>
-                            <th class="px-6 py-3 font-semibold">User</th>
+                            <th class="px-6 py-3 font-semibold">Rute</th>
+                            <th class="px-6 py-3 font-semibold">Tanggal</th>
                             <th class="px-6 py-3 font-semibold">Total</th>
-                            <th class="px-6 py-3 font-semibold">Status</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
@@ -84,16 +88,27 @@
                             ===========
                         --}}
                         {{-- catatan : pakai foreach --}}
+                        @php
+                        $i = 0;
+                        $total = count ($jadwal);
+                        if ($total > 0){
+                            do{
+                        @endphp
                         <tr class="transition hover:bg-gray-50">
-                            <td class="px-6 py-4">PSS-001</td>
-                            <td class="px-6 py-4 font-medium">Roma Kelapa</td>
-                            <td class="px-6 py-4">Rp. 123.123.123</td>
+                            <td class="px-6 py-4">{{ $jadwal[$i]->bus->nama_bus }}</td>
+                            <td class="px-6 py-4 font-medium">
+                                {{ $jadwal[$i]->asal }} -> {{ $jadwal[$i]->tujuan }}
+                            </td>
+                            <td class="px-6 py-4">{{ $jadwal[$i]->tanggal }}</td>
                             <td class="px-6 py-4">
-                                <span class="rounded bg-green-100 px-2 py-1 text-xs text-green-700"
-                                    >Selesai</span
-                                >
+                                Rp {{ number_format($jadwal[$i]->harga, 0, ',', '.') }}
                             </td>
                         </tr>
+                        @php
+                        $i++;
+                           }while ($i < $total);
+                        };
+                        @endphp
                     </tbody>
                 </table>
             </div>
@@ -116,10 +131,10 @@
                             ===========
                         --}}
                         <tr>
-                            <th class="px-6 py-3 font-semibold">Bus</th>
-                            <th class="px-6 py-3 font-semibold">Rute</th>
-                            <th class="px-6 py-3 font-semibold">Jam</th>
-                            <th class="px-6 py-3 font-semibold">Harga</th>
+                            <th class="px-6 py-3 font-semibold">Kode Pemesanan</th>
+                            <th class="px-6 py-3 font-semibold">Nama</th>
+                            <th class="px-6 py-3 font-semibold">Total</th>
+                            <th class="px-6 py-3 font-semibold">Status</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-100">
@@ -128,13 +143,24 @@
                             COLUMN BODY
                             ===========
                         --}}
-                        {{-- catatan : pakai dowhile --}}
+                        @php
+                    $i = 0;
+                    $total = count($pemesanan);
+                    if ($total > 0) {
+                        do {
+                    @endphp
                         <tr class="transition hover:bg-gray-50">
-                            <td class="px-6 py-4 capitalize">Surya Husada</td>
-                            <td class="px-6 py-4 text-black">Denpasar -> Buleleng</td>
-                            <td class="px-6 py-4">12:00</td>
-                            <td class="px-6 py-4">Rp.123.000</td>
+                            <td class="px-6 py-4 capitalize">{{ $pemesanan[$i]->kode_booking }}</td>
+                            <td class="px-6 py-4 text-black">{{ $pemesanan[$i]->user->name }}</td>
+                            <td class="px-6 py-4">
+                                {{ number_format($pemesanan[$i]->total_harga, 0, ',', '.') }}
+                            </td>
+                            <td class="px-6 py-4 capitalize">{{ $pemesanan[$i]->status }}</td>
                         </tr>
+                        @php
+                            $i++;
+                        } while ($i < $total);
+                    }@endphp
                     </tbody>
                 </table>
             </div>

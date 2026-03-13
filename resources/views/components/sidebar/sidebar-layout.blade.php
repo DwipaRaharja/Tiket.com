@@ -60,5 +60,15 @@
                 />
             </x-sidebar.sidebar-link>
         </ul>
+        <div class="pl-2">
+            <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <button
+                    class="inline-flex items-center rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition duration-150 ease-in-out hover:bg-red-700"
+                >
+                    Logout
+                </button>
+            </form>
+        </div>
     </div>
 </aside>

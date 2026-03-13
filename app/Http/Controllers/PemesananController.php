@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jadwal;
 use App\Models\Pemesanan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PemesananController extends Controller
 {
@@ -13,7 +14,7 @@ class PemesananController extends Controller
      */
     public function index()
     {
-        $pemesanan = Pemesanan::paginate('5');
+        $pemesanan = Pemesanan::with(['user', 'jadwal'])->paginate('5');
 
         return view('admin.manage_pemesanan.index', compact('pemesanan'));
     }
@@ -73,32 +74,106 @@ class PemesananController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pemesanan $pemesanan)
+    public function show($id)
     {
-        //
+        $pemesanan = Pemesanan::with(['user', 'jadwal'])->findOrFail($id);
+        return view('admin.manage_pemesanan.detail', compact('pemesanan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pemesanan $pemesanan)
+    public function edit($id)
     {
-        //
+        $jadwal = Jadwal::with('bus')->get();
+        $pemesanan = Pemesanan::with(['user', 'jadwal'])->findOrFail($id);
+        return view('admin.manage_pemesanan.update', compact('pemesanan', 'jadwal'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pemesanan $pemesanan)
+    public function update(Request $request, $id)
     {
-        //
+        $validate = $request->validate([
+            'user_id' => 'required',
+            'jadwal' => 'required',
+            'nama_penumpang' => 'required',
+            'jumlah_kursi' => 'required|integer',
+            'total_harga' => 'required|integer',
+            'status' => 'required',
+        ], [
+            'jadwal.required' => 'Pilihan jadwal kosong',
+            'nama_penumpang.required' => 'Nama penumpang kosong',
+            'jumlah_kursi.required' => 'Jumlah kursi kosong',
+            'status' => 'pilihan status kosong',
+        ]);
+
+        $pemesanan = Pemesanan::findOrFail($id);
+
+        $pemesanan->update([
+            'user_id' => $validate['user_id'],
+            'jadwal_id' => $validate['jadwal'],
+            'nama_penumpang' => $validate['nama_penumpang'],
+            'jumlah_kursi' => $validate['jumlah_kursi'],
+            'total_harga' => $validate['total_harga'],
+            'status' => $validate['status'],
+        ]);
+
+
+        return redirect('/admin/manage-pemesanan')->with('success', 'Data berhasil diupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pemesanan $pemesanan)
+    public function destroy($id)
     {
-        //
+        $pemesanan = Pemesanan::findOrFail($id);
+        $pemesanan->delete();
+        return redirect('/admin/manage-pemesanan')->with('success', value: 'Data berhasil di hapus');
+    }
+
+    public function jadwalSaya()
+    {
+        $jadwalSaya = Pemesanan::with('jadwal')
+            ->where('user_id', Auth::id())
+            ->latest()
+            ->get();
+
+        return view('user.jadwal-saya', compact('jadwalSaya'));
+    }
+
+    public function destroyPemesananUser($id)
+    {
+        Pemesanan::findOrFail($id)->delete();
+
+        return redirect('/jadwal-saya')
+            ->with('success', 'Pesanan dibatalkan');
+    }
+    public function detailPemesananUser($id)
+    {
+        $data = Pemesanan::with('jadwal')
+            ->where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail();
+        return view('user.detail-tiket', compact('data'));
+    }
+
+    public function pembayaranPemesananUser($id)
+    {
+        $data = Pemesanan::findOrFail($id);
+        return view('user.pembayaraan', compact('data'));
+    }
+
+    public function konfirmasiBayar($id)
+    {
+        Pemesanan::where('id', $id)
+            ->update([
+                'status' => 'dibayar'
+            ]);
+
+        return redirect('/jadwal-saya')
+            ->with('success', 'Pembayaran berhasil');
     }
 }

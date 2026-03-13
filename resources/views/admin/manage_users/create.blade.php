@@ -86,7 +86,7 @@
                             name="Role User"
                             nameRequest="role"
                             typeInput="select"
-                            :selectOptions="['admin', 'customer']"
+                            :selectOptions="['admin', 'user']"
                         />
 
                         {{-- 
